@@ -262,11 +262,7 @@ start = time.time()
 
 grid = [(-2,-2),(-2,-1.5),(-2,-1),(-2,-0.5),(-2,0),(-2,0.5),(-2,1),(-2,1.5),(-2,2),(-2,2.5),(-1.5,-2),(-1.5,-1.5),(-1.5,-1),(-1.5,-0.5),(-1.5,0),(-1.5,0.5),(-1.5,1),(-1.5,1.5),(-1.5,2),(-1.5,2.5),(-1,-2),(-1,-1.5),(-1,-1),(-1,-0.5),(-1,0),(-1,0.5),(-1,1),(-1,1.5),(-1,2),(-1,2.5),(-0.5,-2),(-0.5,-1.5),(-0.5,-1),(-0.5,-0.5),(-0.5,0),(-0.5,0.5),(-0.5,1),(-0.5,1.5),(-0.5,2),(-0.5,2.5),(0,-2),(0,-1.5),(0,-1),(0,-0.5),(0,0.5),(0,1),(0,1.5),(0,2),(0,2.5),(0.5,-2),(0.5,-1.5),(0.5,-1),(0.5,-0.5),(0.5,0),(0.5,0.5),(0.5,1),(0.5,1.5),(0.5,2),(0.5,2.5),(1,-2),(1,-1.5),(1,-1),(1,-0.5),(1,0.5),(1,1),(1,1.5),(1,2),(1,2.5),(1.5,-2),(1.5,-1.5),(1.5,-1),(1.5,-0.5),(1.5,0.5),(1.5,1),(1.5,1.5),(1.5,2),(1.5,2.5),(2,-2),(2,-1.5),(2,-1),(2,-0.5),(2,0),(2,0.5),(2,1),(2,1.5),(2,2),(2,2.5),(2.5,-2),(2.5,-1.5),(2.5,-1),(2.5,-0.5),(2.5,0),(2.5,0.5),(2.5,1),(2.5,1.5),(2.5,2),(2.5,2.5)]
 
-#all_combinations = list(itertools.product(grid, repeat=2))
-#print(len(all_combinations))
-
 four_bars = list(combinations(grid,3))
-#print('Initial six-bar count - {}.'.format(len(four_bars)))
 
 filtered_four_bars = []
 
@@ -274,14 +270,8 @@ for four_bar in four_bars:
     j_1, j_2, j_5 = four_bar
     j_0, j_3, j_6 = (0.0, 0.0), (1.0, 0.0), (1.5, 0.0)
 
-    #if j_0 == j_1 or j_0 == j_2 or j_0 == j_3 or j_0 == j_5 or j_0 == j_6 or j_1 == j_2 or j_1 == j_3 or j_1 == j_5 or \
-     #       j_1 == j_6 or j_2 == j_3 or j_2 == j_5 or j_2 == j_6 or \
-      #  j_3 == j_5 or j_3 == j_6 or j_5 == j_6:
-       # continue
-    #else:
     filtered_four_bars.append((j_0, j_1, j_2, j_3, j_5, j_6))
 
-#print('Four-bar count after removing same-joint ones - {}.'.format(len(filtered_four_bars)))
 
 four_bars = dict()
 
@@ -295,7 +285,6 @@ for filtered_four_bar in filtered_four_bars:
     four_bars[(round(l_1/l_0, 1), round(l_2/l_0, 1), round(l_3/l_0, 1))] = filtered_four_bar
 
 filtered_four_bars = list(four_bars.values())
-#print('Four-bar count after removing similar ones - {}.'.format(len(filtered_four_bars)))
 four_bars = []
 
 for filtered_four_bar in filtered_four_bars:
@@ -315,20 +304,11 @@ for filtered_four_bar in filtered_four_bars:
     if shortest + longest <= pq:
         four_bars.append(filtered_four_bar)
 
-#print('Four-bar count after removing non-Grashof ones - {}.'.format(len(four_bars)))
-#print('Total Four-bar count - {}.'.format(len(four_bars))
 
 with open('D:/abhay/Stephenson3/Dataset.txt', 'w') as f:
     for four_bar in four_bars:
         j_0, j_1, j_2, j_3, j_5, j_6 = four_bar
 
-        # j_0 = [-4.796631, -2.797523]
-        # j_1 = [-3.396078, -0.611765]
-        # j_2 = [3.105882, 1.631372]
-        # j_3 = [4.324937, -3.23674]
-        # j_4 = [4.515375, 0.255824]
-        # j_5 = [4.442584, 5.21032]
-        # j_6 = [7.81, -3.35]
 
         l_0 = math.dist(np.array(j_3),np.array(j_0))
         l_1 = math.dist(np.array(j_1),np.array(j_0))
